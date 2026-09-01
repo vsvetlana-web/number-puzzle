@@ -121,10 +121,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
 <style scoped>
 .game {
-  --gap: min(2.6vw, 14px);
+  --gap: clamp(8px, 2.6vw, 14px);
   --tile-radius: 6px;
-  width: min(94vw, 430px);
-  max-width: 100%;
+  width: 100%;
+  max-width: 440px;
   margin: 0 auto;
 }
 
@@ -181,9 +181,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
 .game__toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px 12px;
   margin-bottom: 12px;
 }
 
@@ -202,6 +203,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   font: inherit;
   font-weight: 700;
   font-size: 14px;
+  white-space: nowrap;
   cursor: pointer;
   transition: filter 120ms ease, transform 80ms ease;
 }
@@ -221,24 +223,20 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 .board {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
   padding: var(--gap);
   border-radius: 10px;
   background: #bbada0;
   touch-action: none;
-  overflow: hidden;
 }
 
 .board__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
   gap: var(--gap);
-  width: 100%;
-  height: 100%;
 }
 
 .board__cell {
+  aspect-ratio: 1;
   border-radius: var(--tile-radius);
   background: rgba(238, 228, 218, 0.35);
 }
