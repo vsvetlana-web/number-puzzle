@@ -45,8 +45,11 @@ function onTouchEnd(event: TouchEvent): void {
 }
 
 function tileTransform(row: number, col: number): string {
-  const step = 'var(--cell-size) + var(--gap)'
-  return `translate(calc((${step}) * ${col}), calc((${step}) * ${row}))`
+  // percentages here resolve against the tile's own (square) size = one cell,
+  // so one step is `100% + gap`; keeps tiles locked to the 1fr background grid
+  const stepX = `calc((100% + var(--gap)) * ${col})`
+  const stepY = `calc((100% + var(--gap)) * ${row})`
+  return `translate(${stepX}, ${stepY})`
 }
 
 onMounted(() => window.addEventListener('keydown', onKeydown))
@@ -118,10 +121,9 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
 <style scoped>
 .game {
-  --cell-size: min(20vw, 90px);
   --gap: min(2.6vw, 14px);
   --tile-radius: 6px;
-  width: calc(var(--cell-size) * 4 + var(--gap) * 5);
+  width: min(94vw, 430px);
   max-width: 100%;
   margin: 0 auto;
 }
@@ -250,8 +252,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   position: absolute;
   top: 0;
   left: 0;
-  width: var(--cell-size);
-  height: var(--cell-size);
+  width: calc((100% - 3 * var(--gap)) / 4);
+  height: calc((100% - 3 * var(--gap)) / 4);
   z-index: 2;
   transition: transform 130ms ease-in-out;
   will-change: transform;
