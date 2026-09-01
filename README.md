@@ -1,5 +1,42 @@
-# Vue 3 + TypeScript + Vite
+# 🔢 2048 — упрощённая версия
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Классическая головоломка со слиянием чисел: двигай плитки стрелками,
+одинаковые значения объединяются, набирай очки.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+**Демо:** https://vsvetlana-web.github.io/number-puzzle/
+
+## Как играть
+
+Поле 4×4. Стрелками (или свайпом на мобильном) двигаешь все плитки
+в одну сторону — одинаковые плитки при столкновении сливаются,
+удваивая значение. После каждого хода на пустой клетке появляется
+новая плитка. Игра заканчивается, когда поле заполнено и больше
+нет возможных ходов.
+
+## Технически
+
+Vite + Vue 3 + TypeScript, без внешних зависимостей и API — вся
+игровая логика (движение, слияние, генерация плиток, проверка конца
+игры) вынесена в отдельный composable.
+
+Отдельно проверялся edge-кейс с каскадным слиянием: ряд из четырёх
+одинаковых плиток при движении должен схлопнуться в две плитки
+удвоенного значения за один ход, а не в одну — это частая логическая
+ошибка в реализациях 2048.
+
+## Как собиралось
+
+Каркас и игровая логика — Claude Code (VS Code extension), с моей
+стороны — формулировка правил, тестирование граничных случаев
+(каскадное слияние, ходы без изменений не создают новую плитку)
+и полировка анимации движения плиток.
+Заняло около 30 мин.
+
+## Локальный запуск
+
+\`\`\`
+git clone https://github.com/vsvetlana-web/number-puzzle.git
+cd number-puzzle
+npm install
+npm run dev
+\`\`\`

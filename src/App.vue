@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Game2048 from './components/Game2048.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <Game2048 />
 </template>
